@@ -41,3 +41,13 @@ def email(rate):
         server.login(email,app_pass)
         server.send_message(msg)
         print("Email sent")
+
+def main():
+    data=Currency_rate()
+    email(data)
+    print("Sent")
+
+schedule.every().day.at("19:08").do(main)# you can customise the time as needed. 
+while True:
+    schedule.run_pending()
+    time.sleep(1)

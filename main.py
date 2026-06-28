@@ -12,3 +12,32 @@ def Currency_rate():
 
     return f"*Bangladesh currency rate:{data["data"]["BDT"]["value"]} dollar \n * INR:{data["data"]["INR"]["value"]} dollar \n *EUR:{data["data"]["EUR"]["value"]} dollar"
 
+def email(rate):
+
+    email = "sender@gmail.com"
+    app_pass = "email pass"
+
+    receiver_email = ["receiver@gmail.com"]
+
+    date = datetime.date.today()
+    for i in receiver_email:
+        msg = EmailMessage()
+        msg["Subject"] = "Rate of Different Currencies"
+        msg["From"] = f"Someone<{email}>"
+        msg["To"] = i
+        msg.set_content(f"""
+        Dear Customer,
+        I hope you are doing well.
+        Please find Different Currency Rate:
+        Date: {date}
+        Currency Rate:
+        {rate}
+        Thank you for your continued support.
+        Best Regards,
+        name   
+                                            
+                            """)
+        server = smtplib.SMTP_SSL("smtp.gmail.com",465)
+        server.login(email,app_pass)
+        server.send_message(msg)
+        print("Email sent")
